@@ -18,7 +18,9 @@ class Post(models.Model):
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='posts')
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="group", blank=True, null=True)
+    group = models.ForeignKey(
+        Group, on_delete=models.CASCADE,
+        related_name="group", blank=True, null=True)
     image = models.ImageField(
         upload_to='posts/', null=True, blank=True)
 
@@ -37,8 +39,12 @@ class Comment(models.Model):
 
 
 class Follow(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="follower")
-    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="follower"
+    )
+    following = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="following"
+    )
 
     class Meta:
         unique_together = ("user", "following")
